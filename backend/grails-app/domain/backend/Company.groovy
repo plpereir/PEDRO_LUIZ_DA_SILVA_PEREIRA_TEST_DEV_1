@@ -17,4 +17,11 @@ static hasMany = [stocks: Stock]
     String toString() {
         name
     }
+
+    Company(name, segment)
+    {
+        this.name = name
+        this.segment = segment
+    }
+
 }

@@ -15,4 +15,5 @@ interface StockService {
 
     Stock save(Stock stock)
 
+
 }

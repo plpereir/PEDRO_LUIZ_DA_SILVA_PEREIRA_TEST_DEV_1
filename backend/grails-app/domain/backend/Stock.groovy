@@ -5,11 +5,11 @@ import grails.rest.*
 class Stock {
 
 static belongsTo = [company: Company]
-float price
+double price
 Date priceDate
 
     static constraints = {
-        price min: 1, blank: false
+        price  blank: false
         priceDate  blank: false, date: true
     }
     
