@@ -1,7 +1,7 @@
 package backend
 import grails.rest.*
 
-@Resource(uri='/stock')
+@Resource(uri='/api/stock', formats=['json', 'xml'])
 class Stock {
 
 static belongsTo = [company: Company]
@@ -16,4 +16,6 @@ Date priceDate
     String toString() {
         name
     }
+
+
 }

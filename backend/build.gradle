@@ -101,3 +101,31 @@ assets {
     minifyJs = true
     minifyCss = true
 }
+
+
+task buildInfoProperties() {
+    ext {
+        buildInfoPropertiesFile = 
+            file("$buildDir/resources/main/application.properties")
+        info = [
+            // Look for System environment variable BUILD_TAG.    
+            tag: System.getenv('BUILD_TAG') ?: 'N/A', 
+            // Use current date.    
+            time: new Date().time,
+            // Get username from System properties.    
+            by: System.properties['user.name']]
+    }
+    inputs.properties info
+    outputs.file buildInfoPropertiesFile
+    doFirst {
+        buildInfoPropertiesFile.parentFile.mkdirs()
+        ant.propertyfile(file: ext.buildInfoPropertiesFile) {
+            for(me in info) {
+                entry key: "info.buildInfo.${me.key}", value: me.value
+            }
+        }
+    }
+}
+processResources.dependsOn(buildInfoProperties)
+// Add extra information to be saved in application.properties.
+buildInfoProperties.info.machine = "${InetAddress.localHost.hostName}"

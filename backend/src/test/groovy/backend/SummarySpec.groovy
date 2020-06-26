@@ -1,9 +1,9 @@
 package backend
 
-import grails.testing.services.ServiceUnitTest
+import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class PrintServiceSpec extends Specification implements ServiceUnitTest<PrintService>{
+class SummarySpec extends Specification implements DomainUnitTest<Summary> {
 
     def setup() {
     }

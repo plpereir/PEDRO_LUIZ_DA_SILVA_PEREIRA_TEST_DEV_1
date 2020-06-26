@@ -2,26 +2,22 @@ package backend
 
 import grails.rest.*
 
-@Resource(uri='/api/company')
-class Company {
+@Resource(uri='/api/summary', formats=['json', 'xml'])
+class Summary {
 
-String name
-String segment
-static hasMany = [stocks: Stock]
-
+    String name
+    String segment
+    double price
     static constraints = {
         name size: 5..40, blank: false, unique: true
         segment size: 5..40, blank: false
+        price  blank: false
     }
 
-    String toString() {
-        name
-    }
-
-    Company(name, segment)
+    Summary(name, segment, price)
     {
         this.name = name
         this.segment = segment
+        this.price = price
     }
-
 }

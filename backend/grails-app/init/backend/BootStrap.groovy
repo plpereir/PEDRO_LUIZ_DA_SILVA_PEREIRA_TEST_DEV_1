@@ -3,21 +3,18 @@ import groovy.transform.CompileStatic
 import java.util.Date
 import groovy.sql.Sql
 
+
 @CompileStatic
 class BootStrap {
 
-    PrintService printService
     StockService stockService
     CompanyService companyService
+    SummaryService summaryService
     def init = { servletContext ->
         
-        Company a = new Company(name:'Apple',segment:'technology')
-        Company b = new Company(name:'Volkswagen',segment:'vehicles')
-        Company c = new Company(name:'Amazon',segment:'technology')
-
-        companyService.save(a).save()
-        companyService.save(b).save()
-        companyService.save(c).save()
+        new Company(name:'Apple',segment:'technology').save()
+        new Company(name:'Volkswagen',segment:'vehicles').save()
+        new Company(name:'Amazon',segment:'technology').save()
         
         def url = 'jdbc:h2:mem:devDb'
         def user = 'sa'
@@ -88,8 +85,15 @@ class BootStrap {
             }
         }
         
+        //Read data
+        sql.eachRow("select company.name as Name, company.segment as Segment, TO_CHAR(STDDEV(stock.price),'9990D00') as StandardDeviation from stock, company where (company.id=stock.company_id) group by Name order by Name;")   
+        { p -> new Summary(name:p[0], segment:p[1], price: p[2]).save() } 
+       // Double d = new Double("0.0");
+       // new Summary(name:{p[0]}, segment:{p[1]}, price: d).save()}
+            // close connection
         sql.close()
-        printService.getStocks("Ford", 39)
+
+    
     }
     def destroy = {
     }
