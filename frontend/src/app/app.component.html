@@ -383,8 +383,24 @@
   <h2>Next Steps</h2>
   <p>You can do the <a href ='https://bitbucket.org/nitryx-team/rh-dev-1/wiki/Home#markdown-header-33-task-3' target="_blank">task #3</a> here</p>
 
-
-
-
-
+<div class="container">
+  <h1>Summary List</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Segment</th>
+        <th>Standard Deviation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let summary of summaries">
+        <td>{{ summary.name }}</td>
+        <td>{{ summary.segment}}</td>
+        <td>{{ summary.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="getAll()" class="btn btn-primary btn-block btn-lg">Get Companies</button>
+</div>
 <router-outlet></router-outlet>

@@ -9,7 +9,7 @@ class BootStrap {
 
     StockService stockService
     CompanyService companyService
-    SummaryService summaryService
+    QuoteService quoteService
     def init = { servletContext ->
         
         new Company(name:'Apple',segment:'technology').save()
@@ -93,7 +93,7 @@ class BootStrap {
             // close connection
         sql.close()
 
-    
+        quoteService.getStocks("Apple", 10);
     }
     def destroy = {
     }
