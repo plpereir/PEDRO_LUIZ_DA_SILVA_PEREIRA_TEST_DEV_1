@@ -33,7 +33,12 @@ informations: https://bitbucket.org/nitryx-team/rh-dev-1/wiki/Home
   ✔  Verified Cypress! /Users/plpereir/Library/Caches/Cypress/4.0.1/Cypress.app
  - Opening Cypress...
 
-
+describe('Test to be fulfilled by the candidate', () => {
+  it('push the button implemented on task #3 and shows the company names', () => {
+      cy.visit('http://localhost:4200')
+      cy.get('.btn-primary').click() 
+      cy.contains('Amazon')
+  })
 
 
 
